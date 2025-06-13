@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login com Google</title>
+  <script type="module">
+    // Importação via módulos (ES6)
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+    import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
+    // Configuração do Firebase (usando seus dados)
+    const firebaseConfig = {
+      apiKey: "AIzaSyCxIWlC3xurzvX1PGgXj1BJFcmEjip_w3o",
+      authDomain: "painel-controladoria.firebaseapp.com",
+      projectId: "painel-controladoria",
+      storageBucket: "painel-controladoria.firebasestorage.app",
+      messagingSenderId: "126947450890",
+      appId: "1:126947450890:web:c6ed7444ee2c62be23fff3"
+    };
+
+    // Inicializa o app
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    // Função de login
+    window.login = function () {
+      const provider = new GoogleAuthProvider();
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          result.user.getIdToken().then((idToken) => {
+            // Redireciona para seu app Streamlit com o token
+            window.location.href = `https://painel-controladoria.streamlit.app/?token=${idToken}`;
+          });
+        })
+        .catch((error) => {
+          alert("Erro no login: " + error.message);
+        });
+    };
+  </script>
+</head>
+<body>
+  <h2>Entrar com sua conta Google</h2>
+  <button onclick="login()">Entrar com Google</button>
+</body>
+</html>
