@@ -7,7 +7,7 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
     import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
-    // Configuração do Firebase (usando seus dados)
+    // Configuração do Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyCxIWlC3xurzvX1PGgXj1BJFcmEjip_w3o",
       authDomain: "painel-controladoria.firebaseapp.com",
@@ -27,8 +27,8 @@
       signInWithPopup(auth, provider)
         .then((result) => {
           result.user.getIdToken().then((idToken) => {
-            // Redireciona para seu app Streamlit com o token
-            window.location.href = `https://painel-controladoria.streamlit.app/?token=${idToken}`;
+            // Redireciona para o app Streamlit com o token correto
+            window.location.href = `https://dashcontroladoria-afs8dky2nquzbebuomdwfi.streamlit.app/?token=${idToken}`;
           });
         })
         .catch((error) => {
@@ -42,3 +42,4 @@
   <button onclick="login()">Entrar com Google</button>
 </body>
 </html>
+
