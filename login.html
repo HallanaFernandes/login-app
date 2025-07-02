@@ -3,11 +3,9 @@
 <head>
   <title>Login com Google</title>
   <script type="module">
-    // Importação via módulos (ES6)
     import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
     import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
-    // Configuração do Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyCxIWlC3xurzvX1PGgXj1BJFcmEjip_w3o",
       authDomain: "painel-controladoria.firebaseapp.com",
@@ -17,19 +15,16 @@
       appId: "1:126947450890:web:c6ed7444ee2c62be23fff3"
     };
 
-    // Inicializa o app
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
-    // Função de login
     window.login = function () {
       const provider = new GoogleAuthProvider();
       signInWithPopup(auth, provider)
-        .then((result) => {
-          result.user.getIdToken().then((idToken) => {
-            // Redireciona para o app Streamlit com o token correto
-            window.location.href = `https://dashcontroladoria-afs8dky2nquzbebuomdwfi.streamlit.app/?token=${idToken}`;
-          });
+        .then(async (result) => {
+          const user = result.user;
+          const idToken = await user.getIdToken();
+          window.location.href = `https://dashcontroladoria-afs8dky2nquzbebuomdwfi.streamlit.app/?token=${idToken}`;
         })
         .catch((error) => {
           alert("Erro no login: " + error.message);
