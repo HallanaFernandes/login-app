@@ -28,7 +28,7 @@
         .then((result) => {
           result.user.getIdToken().then((idToken) => {
             // Redireciona para seu app Streamlit com o token
-            window.location.href = `https://painel-controladoria.streamlit.app/?token=${idToken}`;
+            window.location.href = `https://dashboardcontroladoria.streamlit.app/?token=${idToken}`;
           });
         })
         .catch((error) => {
